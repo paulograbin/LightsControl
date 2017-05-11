@@ -5,18 +5,13 @@ import spark.Spark.port
 
 class Main {
 
-    fun start(driverPath: String) {
+    fun start() {
         port(3000)
 
-        val driver = LightDriver(driverPath)
-
-        get("/lights/:command", LightCommandRoute(lightDriver = driver));
+        get("/lights/:command", LightCommandRoute(LightDriver()));
     }
 }
 
 fun main(args: Array<String>) {
-    if (args.size != 1)
-        error("Invalid parameters...");
-
-    Main().start(args[0])
+    Main().start()
 }

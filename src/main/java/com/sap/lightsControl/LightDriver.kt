@@ -1,11 +1,10 @@
 package com.sap.lightsControl
 
-import java.io.BufferedReader
+import java.lang.ProcessBuilder.Redirect.INHERIT
 
-class LightDriver(driverPath: String) {
+class LightDriver() {
 
-    val driverPath = driverPath
-    val driverFileName = "clewarecontrol"
+    val driverCommand = "clewarecontrol"
     val driverFlag = "-as"
 
     val redLightPosition = "0";
@@ -21,19 +20,16 @@ class LightDriver(driverPath: String) {
     }
 
     fun executeCommand(state: State) {
-        val builder = ProcessBuilder("sudo", driverPath + driverFileName,
+        val builder = ProcessBuilder("sudo", driverCommand,
                 "-d", "902435",
                 driverFlag, redLightPosition, state.getRed(),
                 driverFlag, yellowLightPosition, state.getYellow(),
-                driverFlag, greenLightPosition, state.getGreen());
+                driverFlag, greenLightPosition, state.getGreen())
+                .redirectOutput(INHERIT)
+                .redirectError(INHERIT);
+
+        builder.start();
 
         println(builder.command())
-
-
-        val pr = builder.start();
-
-        val allText = pr.inputStream.bufferedReader().use { BufferedReader::readLine }
-
-        System.out.println(allText)
     }
 }
