@@ -8,7 +8,7 @@ class Main {
     fun start() {
         port(3000)
 
-        get("/lights/:command", LightCommandRoute(LightDriver()));
+        get("/lights/:command", LightCommandRoute(LightDriver()))
     }
 }
 
