@@ -21,7 +21,7 @@ class LightDriver(driverPath: String) {
     }
 
     fun executeCommand(state: State) {
-        val builder = ProcessBuilder(driverPath + driverFileName,
+        val builder = ProcessBuilder("sudo", driverPath + driverFileName,
                 "-d", "902435",
                 driverFlag, redLightPosition, state.getRed(),
                 driverFlag, yellowLightPosition, state.getYellow(),
