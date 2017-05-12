@@ -16,13 +16,13 @@ class State(private var yellow: Int, private var red: Int, private var green: In
 
     fun isValid(): Boolean {
         if(red != 0 && red != 1)
-            return false;
+            return false
 
         if(yellow != 0 && yellow != 1)
-            return false;
+            return false
 
         if(green != 0 && green != 1)
-            return false;
+            return false
 
         return true
     }
